@@ -1,3 +1,3 @@
 #Motif Search
 
-See Rmd for code and html for result.
+See Rmd for code and pdf for result.
