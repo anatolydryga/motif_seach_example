@@ -1,0 +1,44 @@
+---
+title: "DNA Motif Search Example"
+author: "Anatoly Dryga"
+date: "9/22/2015"
+output: html_document
+---
+
+Biostrings package has function **matchDNAPattern** that solves the problem for us.
+For more details on see <http://ugrad.stat.ubc.ca/R/library/Biostrings/html/matchDNAPattern.html>.
+
+Note that now it is called **matchPattern**!
+
+And the pattern is represented by a standard DNA alphabet, see
+<http://ugrad.stat.ubc.ca/R/library/Biostrings/html/DNAPatternAlphabet.html>.
+
+```{r, echo=FALSE, message=FALSE}
+library(Biostrings)
+```
+
+Here is an example for exact match:
+```{r}
+pattern <- 'GATC'
+contig <- DNAString('AAAGATCCCC')
+matchPattern(pattern, contig, fixed=FALSE)
+```
+
+Note that by default reverse complement is NOT searched:
+
+```{r}
+pattern <- 'GGGG'
+contig <- DNAString('AAACCCC')
+matchPattern(pattern, contig, fixed=FALSE)
+```
+
+And here is an example with Ns:
+```{r}
+pattern <- 'GGGNNNAAA'
+contig <- DNAString('GGGTTTAAA')
+matchPattern(pattern, contig, fixed=FALSE)
+```
+
+We have to use `fixed` argument to do proper match with ambiguity nucleotides
+and we will use it for all cases for consistency.
+
